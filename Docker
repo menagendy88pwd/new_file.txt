@@ -1,0 +1,344 @@
+Docker
+------
+
+docker is a containerizaation software that is used to create, build, and deploy applications as containers.
+
+CONTAINERIZATION SOFTWARES
+DOCKER
+ROCKET
+POD MAN
+cri-o
+core-OS
+
+CONTAINERS: Contains everything required to run our applications
+
+DOCKER CANNOT BE INSTALLED ON RED HAT 9. LEVERAGE UBUNTU OR AMAZON LINUX.
+
+T2 MEDIUM
+
+PICK SUB GROUP
+
+PORT NUMBERS:
+SSH 22 ANYWHERE
+HTTP 80 ANYWHERE
+CUSTOM TCP 9000 ANYHWERE
+CUSTOM TCP 8080 CUSTOM
+CUSTOM TCP 
+0-65535
+
+docker version - to see if docker is installed
+
+docker image- code that is need to run your application. we will add tags to images to identify which is which. 
+
+docker pull - pulls image from the repostory from the (docker pull jenkins)
+(docker pull sonarqube)
+
+HOW TO RUN AN APPLICATION: 
+example :docker run --name sonarqube -d -p 6969:9000 sonarqube:latest
+DEFAULT PORT CANNOT BE CHANGED FOR EXAPLE 9000 BUT OTHER ONE CAN
+
+example : docker run --name jenkins -d -p 7000:8080 jenkins/jenkins:latest
+
+
+Go to dockerhub.com
+== how to stop conta2iner:
+
+docker stop (name container)
+Start container:
+docker start (image ID)
+=====how to remove images=======
+
+Example : docker rmi -f sonarqube:latest(image name or image id)
+Docker rmi-f (name of file+tag)
+
+for ex---> docker rmi fa546374 (image id)
+
+===list images===
+docker images
+
+INSTALL MAVEN AND GIT TO DOCKER SERVER 
+
+clone project from git: git clone
+
+HOW TO CREATE AN IMAGE
+
+docker build -t image (name of image from docker repo):tag
+ex. docker build -t unitedwebapp:v1 .
+
+HOW TO PUSH IMAGE
+Docker push username/reponame/tagname
+Example : Docker push tiffy2009/unitedwebapp:v1
+
+docker ps-- lists containers
+docker build -t your-repo-name/spring-ddfboot-mongo .
+ORDER OF EVENTS
+Pull file from git hub using clone
+Maven package
+Ls (go into project)
+Cd into project
+ docker tag image name username/imagename:tag
+docker tag springboot-mongo-app menapwd88/springboot-mongo-app:latest
+
+sudo docker build -t  (name of package) . Don't forget period
+sudo docker build Onlinebookstore-2
+docker images (to check)
+docker run --name united -d -p 1616:9000 sonarqube
+docker run hello-world --->found on chatgpt works better usually
+
+Ls to make sure target file shows up
+Example: docker build -t Onlinebookstore2:v3 . Don't forget dot again!
+docker inspect (docker inspect onlinebookstore2:latest)
+
+
+Brew install awscli 
+ 
+
+localhost7000
+Brew awscli
+ sudo apt install awscli
+``docker-compose 
+docker-compose up -d
+```
+
+## List Docker Containers
+```docker
+docker ps -a
+
+
+```Nov13 20231
+
+DOCKER KEY WORDS:
+
+FROM: refers to the base image library. 
+
+COOPY: can copy files from the source to the destination
+
+MAINTAINER: used to create order if the image 
+
+ADD: can copy files to the image while creating image
+Can also copy local file from host to build content
+And also download files from the remote https locations while creating an image
+
+RUN: instructions will execute while creating an image
+
+CMD: instructions will execute while creating a continer
+
+ARG: Argument or instructions on a docker file. 
+
+EXPOSE: which port is opened
+
+
+MUST STOP AN IMAGE BEFORE REMOVING 
+
+
+AFTER BULDING AN IMAGE I BELIEVE YOU NEED TO RUN THE IMAGE
+BUILD ON THE LOCAL BUT PUSH ON THE SERVER
+
+PULL CODE FROM GIT
+Ls and cd into file
+Mvn package
+Ls and cd into target
+sudo apt install maven git -y
+sudo apt install awscli
+Sudo docker build -t (NAME OF TAG) . (PERIOD AT THE END)
+docker tag image name username/imagename:tag
+Sudo docker run --name (NAME OF TAG) -d -p 3000:8080 spring-boot-app
+docker run hello-world --->found on chatgpt works better usually
+Create local ip 
+BUILD SERVER (MAKE SURE TO DOWNLOAD GIT, AND OTHER THING)
+BUILDING IMAGE
+BUILDING CONTAINER 
+-- locate ip adress 
+Docker network create -d bridge zara 
+(Make sure all ports are open)0-6543 something like that paste ip and port you created
+After you get your code get ip address
+docker run --name mongodb-container -p 27017:27017 -d mongo
+docker run --name springboot-app-container -p 8080:8080 --network=springboot-mongo-app -d springboot-mongo-app
+Netstat -tulpn ---> shows the ports
+sudo apt install net-tools
+Docker run --name 
+docker run --name hello-world --network host  hello -world
+Create a volume---> docker volume create mongodata (docker volume create file_name)
+List volumes---> docker volume ls
+Eww (docker inspect file_name)
+ 
+docker run --name springboot-mongo-app -p 27017:27017 -d mongo---> works every time 
+Docker stop---->stops running image
+
+# Tag the image
+docker tag my_image:latest your_dockerhub_username/my_image:latest
+
+# Login to Docker Hub
+docker login
+
+# Push the image to Docker Hub
+docker push your_dockerhub_username/my_image:latest
+
+
+Docker Volume Commands: docker volume --help
+     Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes
+  ls          List volumes
+  prune       Remove all unused local volumes
+  rm          Remove one or more volumes
+Docker volume ls ---> to list volumes
+Docker volume create (name)----> create volume
+Docker volume inspect (name)-----> to inspect 
+Sudo apt install docker-compose
+Docker-compose
+Docker file instructions to help you build a docker image. Docker images are needed to run the container. Containers have operating systems in it. Portable servers on a software level. Containers need to be in a network to communicate with each other. So if a container goes down they can either die off and you have to create another one. When container dies so you don't lose certain information like your ip address you want to build a custom bridge network. Stateful application holds data and holds volumes a stateless does not. So we need to add storage so that you can add data and connecting it to your container. So when the instance goes down I can save it to S3 or Azure or whatever to save the information on the instance. Docker compose does container orchestration, docker compose keeps a desired state for your server, has to do with traffic. 
+
+
+docker run --name mongo -d --network spring-network \
+    -v /tmp/mongo:/data/db \
+    -e MONGO_INITDB_ROOT_PASSWORD=admin123 \
+    -e MONGO_INITDB_ROOT_USERNAME=root mongo
+  
+EXTERNAL VOLUMES 
+
+In case servers go down AWS has external data storage services you can back up to. You need to know the mount points by checking docker inspect to see how to connect to Amazon EBS. 
+
+Installation guide : https://rexray.readthedocs.io/en/v0.8.2/user-guide/docker-plugins/
+ under amazon ebs copy and paste code. 
+
+DOCKER COMPOSE
+
+3 main points in the yml file and to be put in the beginning of the file tabs are important. 
+Docker create volume
+Docker create network
+Docker create containers/services
+And add version
+
+
+Ex.
+
+ version: '3.1'
+
+services:
+  springboot:
+    image: unitedcore/spring-boot-app
+    restart: always 
+    container_name: spring-boot-app
+    environment:
+    - MONGO_DB_HOSTNAME=mongodb
+    - MONGO_DB_USERNAME=root
+    - MONGO_DB_PASSWORD=admin123
+    ports:
+      - 3000:8080
+    networks:
+      - spring-network
+    working_dir: /opt/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    container_name: mongodb
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=admin123
+    volumes:
+      - data:/data/db
+    networks:
+      - spring-network
+    restart: always
+~                                                                                                                   
+docker-compose up -d                           
+
+KUBERNETES 
+Check Gira for ticket, developers commit the script on git hub, use git  hub to manage source code, jenkins for ci/cd pipeline, sonar for code quality analysis, nexus artifact repository, docker for containerizing app ,ansible as configurigation management , tomcat is a web server, ngenix has load balancing capabalilities preferred web server, kubernetes to orchestrate containerization (ngenix built into kubernetes)
+ 
+master-k8s.sh----.script for server
+After opening server download k8 using git hub script---then md script in server
+Same thing applies to nodes you get the key from the master to connect other nodes, command is on git hub in master setup. 
+
+sudo kubeadm+token
+
+brew install minikube
+sudo kubeadm init === get token then build node servers and add token to script on the detail part of the ubuntu server. 
+
+Node ports should be between 30000-32676
+minikube start
+
+ kubectl create
+ kubectl version
+ kubectl get nodes
+ kubectl get nodes -o wide ---> complete information on nodes
+ kubectl cluster-info
+ kubectl run <pod name> --image <image name>  --->creating pods
+kubectl run mongo-controller --image=menapwd88/springboot-mongo-app:latest --->right way 
+ kubectl describe pod spring-controller-tw19k
+ curl ip adress
+ Kubectl get po ----->shows image status
+Kubectl get po -o wide ---> More detail 
+Kubectl get pods -o wide
+Kubectl get svc -o wide
+Kubectl delete pod mongo 
+Kubectl get rc -o wide
+Kubectl get rc
+Kubectl delete pod spring-controller-twj9k
+Kubectl delete webrs-rzbfft (numbers next to name)
+Kubectl delete rs webrs (rs=replica set)
+Kubectl get all 
+Kubectl get all -o wide
+Kubectl apply -f service.yml
+Kubectl apply -f (file name)
+Kubectl get svc -o wide --->to check if file is created
+Kubectl get svc -n <namespace>
+Kubectl describe svc myappsvc
+Kubectl get all 
+Kubectl get all -o wide
+Kubectl get deployments
+Kubectl describe deployments
+
+
+NODE PORTS RUN FROM 30000- 32676
+
+CREATING PODS: IMPERATIVE
+
+  kubectl run test --image nginx --port 80
+
+CREATING PODS; DECLERATIIVE 
+(SCRIPTED)
+KAMS--- ACRONYM 
+
+K-- KIND (what type of pod)
+A-- API (version)
+M---META DATA-- NAME, NAME SPACE, LABELS, AND TEIRS
+S----SPEC--- CONTAINERS NAME OF CONTAINER, IMAGE NAME , PORTS, CONTAINER PORT 
+/Users/menagendy/Desktop/Docker
+ Kubectl label nodes node4 name=worker2
+ Kubectl label nodes (name of node) (new name)
+
+EKS
+
+ingress is inside the cluster whiles load balancers are external to the cluster, and it only route to a single service.ingresses are native objects inside the cluster that can route to multiple services, while load balancers are external to the cluster and only route to a single service
+
+
+
+Helm is a package manager like apt on ubuntu. Helm is used to download applications. 
+
+
+You can do with all these deployments that we have made you have also deployed application using you know deployment as your key or your go through tribulations objects so apart from using deployments to deploy you've also been able to write what manifest files and I hope each one of you have been able to do that right in manifest file this is also another key experience that you can mention we did when we're doing deployments things that you know interviewers want to hear is things like rollback deployment strategies and stuff like that so I've been able to roll out or roll back you know deployments I've been able to deploy the Canary strategy in my deployments or available to use the the blue-green deployment strategies in my deployments we can also talk about the types of controller managers we have used you know for deployment we have used word demon said we have used replica sets we have used replica controllers I don't know whether we have that stateful set and then the premise so all these things you can talk about how you use you know controller managers or control managers to deploy applications such as you know replica controller replica sets to deploy applications into cumulative cluster.
+
+
+TERRAFORM 
+create or lunch a server
+go to vs code 
+cd downloads from your local 
+create a terraform directory inside your downloads 
+download, install and perhaps update terraform 
+awscli 
+clone your repo from github and 
+rename your repo lto match eg terraform demo to terraform demo 
+open/vi the dev.autovar.tf file 
+update your keys and amazon ec2 zone
+save and close 
+then run the four terraform commands including
+terraform  init,
+terraform validate,
+terraform plan
+terraform apply 
+
+VI dev.auto.tfvars 
+Change mykey= name of server
